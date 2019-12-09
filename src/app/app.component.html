@@ -1,8 +1,14 @@
-    <div class="container">
+    <div class="container justify-content-center">
         <div class="row justify-content-center">
-            <div class="col-4 ">
+            <div class="col-4 text-center ">
                 <h1>HANGMAN</h1>
             </div>
+        </div>
+        <div class="row justify-content-center" (click)="startGame()">
+            <div class="col-2">
+                    <div class="btn btn-danger">START GAME</div>
+            </div>
+           
         </div>
         <div class="row ">
            <div class="col-md-10">
@@ -27,7 +33,7 @@
 
         <div class="row">
             <div class="col-md-10">
-                <app-draw-hangman></app-draw-hangman>
+                <app-draw-hangman [drawPart]="bodyPart" ></app-draw-hangman>
             </div>
         </div>
        

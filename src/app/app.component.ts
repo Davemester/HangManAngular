@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { Dictionary } from 'src/app/components/taskword/dictionary';
 import { TaskWord } from 'src/app/components/taskword/taskword';
 import { AnswerCheck } from 'src/app/components/taskword/answercheck';
@@ -13,19 +13,20 @@ export class AppComponent {
   guessedLetter: string;
   taskWord: TaskWord;
   underscoreArray: string[];
-  attempts: number;
+  attempts = 0;
   attemptLimit: number;
   taskWordLength: number;
   attemptsLeft: number;
   wrongGuesses = '';
+  bodyPart: number;
+  isStartedGame: boolean;
 
   constructor() {
-    this.makeWord();
+    //this.makeWord();
     this.attempts = 0;
     this.attemptLimit = 11;
-    // this.hangman = new Hangman();
-   }
 
+   }
 
   async makeWord() {
     const task = new Dictionary();
@@ -35,7 +36,13 @@ export class AppComponent {
     this.underscoreArray = word.underscoreArray;
     this.taskWordLength = this.taskWord.wordLetters.length;
     this.attemptsLeft = this.attemptLimit - this.attempts;
-    console.log(this.taskWordLength, this.attemptsLeft);
+
+  }
+
+  startGame() {
+    console.log('elindul');
+    this.makeWord();
+    this.isStartedGame = true;
   }
 
 handleGoodAnswer(word: TaskWord, guess: string) {
@@ -46,18 +53,14 @@ handleGoodAnswer(word: TaskWord, guess: string) {
 }
 handleWrongAnswer(guess: string) {
     console.log('rossz válasz');
-    this.attempts++;
+    this.attempts ++;
     this.attemptsLeft--;
+    this.bodyPart = this.attempts;
     this.wrongGuesses += `${guess.toLowerCase()},`;
     if (this.attempts === this.attemptLimit) {
       console.log('vesztettél');
     }
-  // this.guessArray.addToGuessArray(guess.value);
-  // Display.showWrongAttempt();
-  // Display.showGuessedLetters(this.guessArray.guessArray);
-  // Display.showAttemptsLeft(this.attemptLimit-this.attempts)
-  // this.hangman.drawHangMan(this.attempts);
-  // Display.clearInputField(guess);
+
 }
 
 letterCheck() {
@@ -67,9 +70,11 @@ letterCheck() {
 }
 
 getClickedLetter(letter: string) {
-  console.log(letter);
-  this.guessedLetter = letter;
-  this.letterCheck();
+  if (this.isStartedGame) {
+    this.guessedLetter = letter;
+    this.letterCheck();
+  }
+
 }
 }
 
