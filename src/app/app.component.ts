@@ -20,12 +20,15 @@ export class AppComponent {
   wrongGuesses = '';
   bodyPart: number;
   isStartedGame: boolean;
+  isLastPart: boolean;
+  clearCanvas: boolean;
+  isWin = false;
+  isLost = false;
 
   constructor() {
-    //this.makeWord();
-    this.attempts = 0;
-    this.attemptLimit = 11;
 
+    this.attempts = 0;
+    // this.attemptLimit = 11;  // ide vhogy beilleszteni az erősségtől való függést
    }
 
   async makeWord() {
@@ -34,31 +37,39 @@ export class AppComponent {
     console.log(word);
     this.taskWord = word;
     this.underscoreArray = word.underscoreArray;
+    this.attemptLimit = this.taskWord.strength;
     this.taskWordLength = this.taskWord.wordLetters.length;
     this.attemptsLeft = this.attemptLimit - this.attempts;
 
   }
 
   startGame() {
-    console.log('elindul');
+    this.prepareNewGame();
     this.makeWord();
-    this.isStartedGame = true;
   }
 
 handleGoodAnswer(word: TaskWord, guess: string) {
   word.transfromWord(guess);
   if (AnswerCheck.checkAnswer(word)) {
     console.log('győztél');
+
+    this.isStartedGame = false;
+    this.isWin = true;
   }
 }
 handleWrongAnswer(guess: string) {
-    console.log('rossz válasz');
+
     this.attempts ++;
     this.attemptsLeft--;
     this.bodyPart = this.attempts;
     this.wrongGuesses += `${guess.toLowerCase()},`;
+    this.clearCanvas = false;
+
     if (this.attempts === this.attemptLimit) {
-      console.log('vesztettél');
+      this.isLost = true;
+      this.isLastPart = true;
+      this.isStartedGame = false;
+      // ide lehet a readyClear false
     }
 
 }
@@ -74,7 +85,20 @@ getClickedLetter(letter: string) {
     this.guessedLetter = letter;
     this.letterCheck();
   }
-
 }
+
+prepareNewGame() {
+  this.isWin = false;
+  this.isLost = false;
+  this.bodyPart = 0;
+  this.clearCanvas = true;
+  this.isStartedGame = true;
+  this.attempts = 0;
+  this.attemptLimit = 11;
+  this.taskWordLength = 0;
+  this.wrongGuesses = '';
+  this.isLastPart = false;
+}
+
 }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit, ElementRef, ViewChild, Input, SimpleChanges, ChangeDetectionStrategy, DoCheck } from '@angular/core';
 
-
 interface HangmanDraw {
   start: {x: number, y: number};
   end: {x: number, y: number};
@@ -15,10 +14,12 @@ interface HangmanDraw {
 })
 
 
-
 export class DrawHangmanComponent implements OnInit, DoCheck  {
 
   @Input() drawPart: number;
+  @Input() isStarted: boolean;
+  @Input() isLastPart: boolean;
+  @Input() readyToClearCanvas: boolean;
 
 
   @ViewChild('hangmanCanvas', {static: false})
@@ -39,21 +40,15 @@ export class DrawHangmanComponent implements OnInit, DoCheck  {
   rightEye: any;
   mouth: HangmanDraw;
   coordinates: any;
-  num: number;
-
-
 
   ngDoCheck() {
-    console.log('docheck történt');
-    if (this.drawPart > 0) {
-      this.drawHangMan(this.drawPart - 1);
-    }
+   this.checkBeforeDraw();
   }
 
   constructor() {
-
-    this.num = 0;
+    this.isStarted = false;
     this.coordinates = [
+
     this.bottomLine = {start: {x: 10, y: 280},
     end: {x: 80, y: 280},
     lineWidth: 10},
@@ -103,62 +98,62 @@ export class DrawHangmanComponent implements OnInit, DoCheck  {
     this.mouth = {start: {x: 135, y: 127},
     end: {x: 155, y: 127},
     lineWidth: 3}
-
     ];
-
 }
-
 
 ngOnInit() {
 
 }
 
-
 ngAfterViewInit(): void {
   this.canvasDrawer = (this.hangmanCanvas.nativeElement as HTMLCanvasElement).getContext('2d');
-  console.log('ngAfterViewInit');
 }
 
+checkBeforeDraw() {
+  if (this.readyToClearCanvas) {
+    this.clearCanvas();
+    this.readyToClearCanvas = false;
+  }
+  if (this.isLastPart) {
+    console.log('uccsó testrész');
+    this.drawHangMan(this.drawPart - 1);
+    this.isLastPart = false;
+    this.isStarted = false;
+  }
 
-
+  if (this.drawPart > 0 && this.isStarted) {
+    console.log('egyéb testrész');
+    this.drawHangMan(this.drawPart - 1);
+  }
+}
 
 clearCanvas() {
-
     this.canvasDrawer.clearRect(0, 0, 300, 300);
  }
 
-/* resetCanvas() {
-    this.canvasParent.innerHTML='';
-} */
-
 drawHangMan(drawpart: number) {
-  if (Array.isArray(this.coordinates[drawpart])) {
 
+  if (Array.isArray(this.coordinates[drawpart])) {
     this.drawCircle(this.coordinates[drawpart], 5);
-  } else {this.drawLine(this.coordinates[drawpart]); }
+  } else {this.drawLine(this.coordinates[drawpart]);
+    }
 }
 
 drawLine(coordinates: HangmanDraw) {
-
+  this.canvasDrawer.beginPath();
   this.canvasDrawer.lineWidth = coordinates.lineWidth;
+
   this.canvasDrawer.moveTo(coordinates.start.x, coordinates.start.y);
   this.canvasDrawer.lineTo(coordinates.end.x, coordinates.end.y);
   this.canvasDrawer.stroke();
+  this.canvasDrawer.closePath();
 }
 
 drawCircle(coordinates: number[], linewidth: number) {
-  this.canvasDrawer.lineWidth = linewidth;
   this.canvasDrawer.beginPath();
+  this.canvasDrawer.lineWidth = linewidth;
   this.canvasDrawer.arc(coordinates[0], coordinates[1], coordinates[2], 0, 2 * Math.PI);
   this.canvasDrawer.stroke();
+  this.canvasDrawer.closePath();
 }
-
-testDraw() {
-
-  this.drawHangMan(this.num);
-  this.num++;
-}
-
-
-
 }

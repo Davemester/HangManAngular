@@ -1,5 +1,19 @@
 <div class="col-md-10">
-    Length: <input type="text" [value]="wordLength" readonly>
-    Attempts left: <input type="text" [value]="attemptsLeft"  readonly >
-   Wrong Guesses: <input type="text" [value]="wrongGuessedLetters" readonly>
+
+    <form>
+        <div class="form-group row">
+                <label>Length:</label> 
+                <input class="form-control" type="text" [value]="wordLength" style="width: 8%;"readonly>
+     
+     
+            <label>Attempts left:</label>  
+            <input class="form-control" type="text" [value]="attemptsLeft" style="width: 8%;"  readonly >
+           
+        
+       
+            <label>Wrong Guesses:</label> 
+            <input class="form-control" type="text" [value]="wrongGuessedLetters" style="width: 23%;" readonly>
+        </div>
+    </form>
+ 
 </div>

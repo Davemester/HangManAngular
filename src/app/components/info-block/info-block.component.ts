@@ -5,10 +5,11 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './info-block.component.html',
   styleUrls: ['./info-block.component.scss']
 })
+
 export class InfoBlockComponent implements OnInit {
 
-  @Input() attemptsLeft: any|number ;
-  @Input() wordLength: any|number;
+  @Input() attemptsLeft: any | number ;
+  @Input() wordLength: any | number;
   @Input() wrongGuessedLetters: string[];
 
   constructor() { }
