@@ -39,7 +39,6 @@ export class AppComponent {
     this.attemptLimit = this.taskWord.strength;
     this.taskWordLength = this.taskWord.wordLetters.length;
     this.attemptsLeft = this.attemptLimit - this.attempts;
-
   }
 
   startGame() {
@@ -68,9 +67,7 @@ handleWrongAnswer(guess: string) {
       this.isLost = true;
       this.isLastPart = true;
       this.isStartedGame = false;
-
     }
-
 }
 
 letterCheck() {
@@ -93,7 +90,7 @@ prepareNewGame() {
   this.clearCanvas = true;
   this.isStartedGame = true;
   this.attempts = 0;
-  this.attemptLimit = 11;
+  // this.attemptLimit = 11;
   this.taskWordLength = 0;
   this.wrongGuesses = '';
   this.isLastPart = false;

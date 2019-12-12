@@ -1,21 +1,26 @@
 import { Component, OnInit, ElementRef, ViewChild, Input, SimpleChanges,
-   ChangeDetectionStrategy, OnChanges } from '@angular/core';
+    OnChanges, AfterViewInit } from '@angular/core';
 
 interface HangmanDraw {
-  start: {x: number, y: number};
-  end: {x: number, y: number};
+  start: Point;
+  end: Point;
   lineWidth: number;
+}
+
+interface Point {
+  x: number;
+  y: number;
 }
 
 @Component({
   selector: 'app-draw-hangman',
   templateUrl: './draw-hangman.component.html',
   styleUrls: ['./draw-hangman.component.scss'],
-  // changeDetection: ChangeDetectionStrategy.Default
+
 })
 
 
-export class DrawHangmanComponent implements OnInit, OnChanges  {
+export class DrawHangmanComponent implements OnInit, OnChanges, AfterViewInit  {
 
   @Input() drawPart: number;
   @Input() isStarted: boolean;
@@ -31,16 +36,16 @@ export class DrawHangmanComponent implements OnInit, OnChanges  {
   horizontalLine: HangmanDraw;
   diagonalLine: HangmanDraw;
   rope: HangmanDraw;
-  head: any;
+  head: number[];
   body: HangmanDraw;
   leftFoot: HangmanDraw;
   rightFoot: HangmanDraw;
   leftArm: HangmanDraw;
   rightArm: HangmanDraw;
-  leftEye: any;
-  rightEye: any;
+  leftEye: number[];
+  rightEye: number[];
   mouth: HangmanDraw;
-  coordinates: any;
+  coordinates: HangmanDraw[] | object;
 
   ngOnChanges(change: SimpleChanges) {
     this.checkBeforeDraw();
@@ -144,7 +149,6 @@ drawHangMan(drawpart: number) {
 drawLine(coordinates: HangmanDraw) {
   this.canvasDrawer.beginPath();
   this.canvasDrawer.lineWidth = coordinates.lineWidth;
-
   this.canvasDrawer.moveTo(coordinates.start.x, coordinates.start.y);
   this.canvasDrawer.lineTo(coordinates.end.x, coordinates.end.y);
   this.canvasDrawer.stroke();

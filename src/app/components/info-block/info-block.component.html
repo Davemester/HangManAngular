@@ -1,19 +1,28 @@
-<div class="col-md-10">
+
 
     <form>
         <div class="form-group row">
-                <label>Length:</label> 
-                <input class="form-control" type="text" [value]="wordLength" style="width: 8%;"readonly>
-     
-     
-            <label>Attempts left:</label>  
-            <input class="form-control" type="text" [value]="attemptsLeft" style="width: 8%;"  readonly >
-           
-        
-       
-            <label class="wrong-guess">Wrong Guesses:</label> 
-            <input class="form-control" type="text" [value]="wrongGuessedLetters" style="width: 23%;" readonly>
+            <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <label>Length:</label> 
+                    <input class="form-control" type="text" [value]="wordLength" readonly>
+         
+            </div>
+                
+            <div class="col-12 col-md-6 col-lg-3 d-flex">
+                    <label>Attempts left:</label> 
+                    <input class="form-control" type="text" [value]="attemptsLeft"   readonly >
+                    
+            </div>
+            <div class="col-12 col-lg-6 d-flex">
+                    <label class="wrong-guess">Wrong Guesses:</label> 
+                    <input class="form-control" type="text" [value]="wrongGuessedLetters"  readonly>
+            </div>
+            
         </div>
     </form>
+    <div class="row attempt-bar">
+        <div class="col-3" id="white-bar"></div>
+        <div class="col-3" id="cover-bar" [ngStyle]="{'width': coverWidth}"></div>
+    </div>
  
-</div>
+

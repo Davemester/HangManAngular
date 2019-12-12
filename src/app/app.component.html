@@ -1,5 +1,5 @@
     <div class="container-fluid justify-content-center">
-        <div class="col-md-10 mr-auto ml-auto main-content">
+        <div class="col-lg-10 mr-auto ml-auto main-content">
 
         <div class="row justify-content-center">
             <div class="col-4 text-center ">
@@ -26,7 +26,8 @@
             <div class="col-md-10">
                  <app-info-block [wordLength]="taskWordLength"
                 [attemptsLeft]="attemptsLeft"
-                [wrongGuessedLetters]="wrongGuesses">
+                [wrongGuessedLetters]="wrongGuesses"
+                [allAttempts] = "attemptLimit">
                 </app-info-block>
               
             </div>
