@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef, ViewChild, Input, SimpleChanges, ChangeDetectionStrategy, DoCheck } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Input, SimpleChanges,
+   ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
 interface HangmanDraw {
   start: {x: number, y: number};
@@ -10,11 +11,11 @@ interface HangmanDraw {
   selector: 'app-draw-hangman',
   templateUrl: './draw-hangman.component.html',
   styleUrls: ['./draw-hangman.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  // changeDetection: ChangeDetectionStrategy.Default
 })
 
 
-export class DrawHangmanComponent implements OnInit, DoCheck  {
+export class DrawHangmanComponent implements OnInit, OnChanges  {
 
   @Input() drawPart: number;
   @Input() isStarted: boolean;
@@ -41,9 +42,10 @@ export class DrawHangmanComponent implements OnInit, DoCheck  {
   mouth: HangmanDraw;
   coordinates: any;
 
-  ngDoCheck() {
-   this.checkBeforeDraw();
+  ngOnChanges(change: SimpleChanges) {
+    this.checkBeforeDraw();
   }
+
 
   constructor() {
     this.isStarted = false;

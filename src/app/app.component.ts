@@ -28,7 +28,6 @@ export class AppComponent {
   constructor() {
 
     this.attempts = 0;
-    // this.attemptLimit = 11;  // ide vhogy beilleszteni az erősségtől való függést
    }
 
   async makeWord() {
@@ -69,7 +68,7 @@ handleWrongAnswer(guess: string) {
       this.isLost = true;
       this.isLastPart = true;
       this.isStartedGame = false;
-      // ide lehet a readyClear false
+
     }
 
 }

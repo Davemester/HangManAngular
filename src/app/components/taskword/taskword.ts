@@ -24,7 +24,7 @@ export class TaskWord {
     }
   public makeStringFromArray(array: string[]) {
         let result = '';
-        array.forEach((item: string)  =>{
+        array.forEach((item: string)  => {
             if (item !== '_') {
                 result += item;
             }

@@ -8,10 +8,15 @@ form {
 input {
     text-align: center; ;
     margin-bottom: 2px;
+    border: rgb(101, 52, 236) solid 0.3px;
+    box-shadow: rgb(101, 52, 236) 2px 2px;
 
 }
 
 label {
     padding-right: 15px;
     padding-left: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: #ffffff;
+    text-shadow: 1px 1px black;
 }
