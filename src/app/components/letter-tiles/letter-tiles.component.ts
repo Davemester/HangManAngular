@@ -21,13 +21,9 @@ export class LetterTilesComponent implements OnInit {
     this.sendLetter();
   }
 
- /*  ngOnChanges(change: SimpleChanges) {
-    if (this.targetLetter) {
-      this.sendLetter();
- }
 
-} */
-sendLetter() {
-  this.clickedLetterEvent.emit(this.targetLetter);
-}
+  sendLetter() {
+    this.clickedLetterEvent.emit(this.targetLetter);
+
+  }
 }

@@ -16,7 +16,7 @@ export class InfoBlockComponent implements OnInit, OnChanges {
   maxWidth = 150;
   coverWidth: string;
   constructor() {
-    // this.coverWidth = '150px';
+
   }
 
   ngOnChanges() {
@@ -24,12 +24,11 @@ export class InfoBlockComponent implements OnInit, OnChanges {
     if (this.attemptsLeft === this.allAttempts) {
       this.coverWidth = '150px';
       this.maxWidth = 150;
-    }
-    else {
+    } else {
 
       this.calculateCoverWidth();
       this.coverWidth = `${this.maxWidth}px`;
-      console.log(this.coverWidth);
+
     }
   }
 
@@ -44,15 +43,14 @@ export class InfoBlockComponent implements OnInit, OnChanges {
   calculateCoverWidth() {
 
     if (this.attemptsLeft === 0) {
-      console.log('nulla vazze');
+
       this.maxWidth = 0;
 
       return;
     }
     if (this.allAttempts) {
       const unit = 150 / this.allAttempts;
-      console.log(unit);
-      this.maxWidth -= unit; // itt a hiba , Nan ad vissza
+      this.maxWidth -= unit;
     }
 
 

@@ -12,6 +12,7 @@ export class GuessArrayComponent implements OnInit {
 
   @Input() guessedLetter: string;
   @Input() underscoreArray: any;
+  @Input() answer: any;
 
 
   constructor() {

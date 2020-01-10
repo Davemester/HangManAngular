@@ -1,5 +1,10 @@
-import { Component, OnInit, ElementRef, ViewChild, Input, SimpleChanges,
-    OnChanges, AfterViewInit } from '@angular/core';
+import { Component,
+  OnInit, ElementRef,
+  ViewChild,
+  Input,
+  SimpleChanges,
+  OnChanges,
+  AfterViewInit } from '@angular/core';
 
 interface HangmanDraw {
   start: Point;
@@ -122,14 +127,14 @@ checkBeforeDraw() {
     this.readyToClearCanvas = false;
   }
   if (this.isLastPart) {
-    console.log('uccsó testrész');
+
     this.drawHangMan(this.drawPart - 1);
     this.isLastPart = false;
     this.isStarted = false;
   }
 
   if (this.drawPart > 0 && this.isStarted) {
-    console.log('egyéb testrész');
+
     this.drawHangMan(this.drawPart - 1);
   }
 }
