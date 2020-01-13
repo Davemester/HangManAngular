@@ -1,55 +1,50 @@
-    <div class="container-fluid justify-content-center">
-        <div class="col-lg-10 mr-auto ml-auto main-content">
-
-        <div class="row justify-content-center">
-            <div class="col-4 text-center ">
-                <h1>HANGMAN</h1>
-            </div>
+<div class="container-fluid justify-content-center">
+    <div class="col-12 mr-auto ml-auto main-content">
+    <div class="row justify-content-center">
+            <h1>HANGMAN</h1>
+    </div>
+    <div class="row justify-content-center" (click)="startGame()">
+        
+        <div class="btn btn-danger">START GAME</div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        <app-letter-tiles 
+        (clickedLetterEvent)="getClickedLetter($event)">
+        </app-letter-tiles>
+        </div> 
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10 ml-auto">
+            <app-guess-array [underscoreArray]="underscoreArray"></app-guess-array>
         </div>
-        <div class="row justify-content-center" (click)="startGame()">
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+                <app-info-block [wordLength]="taskWordLength"
+            [attemptsLeft]="attemptsLeft"
+            [wrongGuessedLetters]="wrongGuesses"
+            [allAttempts] = "attemptLimit">
+            </app-info-block>
             
-            <div class="btn btn-danger">START GAME</div>
         </div>
-        <div class="row justify-content-center">
-           <div class="col-md-8">
-            <app-letter-tiles 
-            (clickedLetterEvent)="getClickedLetter($event)">
-            </app-letter-tiles>
-           </div> 
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-10 ml-auto">
-                <app-guess-array [underscoreArray]="underscoreArray"></app-guess-array>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                 <app-info-block [wordLength]="taskWordLength"
-                [attemptsLeft]="attemptsLeft"
-                [wrongGuessedLetters]="wrongGuesses"
-                [allAttempts] = "attemptLimit">
-                </app-info-block>
-              
-            </div>
-        </div>
+    </div>
 
-        <div class="row justify-content-center" id="hangman">
-            <div class="col-md-5">
-                <app-draw-hangman 
-                [drawPart]="bodyPart"
-                [isStarted] ="isStartedGame"
-                [isLastPart] ="isLastPart" 
-                [readyToClearCanvas] = "clearCanvas">
-                </app-draw-hangman>
-            </div>
-            <div class="col-md-5">
-                <img class="image-fluid" src="assets/win.png" alt="" *ngIf="isWin">
-                <img class="image-fluid" src="assets/gameover.jpg" alt="" *ngIf="isLost">
-            </div>
+    <div class="row justify-content-center" id="hangman">
+        <div class="col-md-5">
+            <app-draw-hangman 
+            [drawPart]="bodyPart"
+            [isStarted] ="isStartedGame"
+            [isLastPart] ="isLastPart" 
+            [readyToClearCanvas] = "clearCanvas">
+            </app-draw-hangman>
         </div>
-       
+        <div class="col-md-5">
+            <img class="image-fluid" src="assets/win.png" alt="" *ngIf="isWin">
+            <img class="image-fluid" src="assets/gameover.jpg" alt="" *ngIf="isLost">
         </div>
     </div>
     
-    
+    </div>
+</div>
 
